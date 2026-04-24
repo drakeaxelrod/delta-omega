@@ -7,6 +7,7 @@ result/
 .west/
 .build/
 zmk/
+zmk-keyboard-delta-lambda/
 zmk-rgbled-widget/
 zephyr/
 modules/

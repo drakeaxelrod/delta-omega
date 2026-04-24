@@ -61,12 +61,28 @@ flash target:
     cp "{{out}}/delta-lambda-{{target}}.uf2" "$mountpoint/"
     echo "Flashed {{target}}"
 
-# Download XIAO nRF52840 bootloader
-bootloader:
+# Download XIAO nRF52840 Sense bootloader (UF2 update — flash via bootloader drive)
+bootloader-uf2:
     mkdir -p {{out}}
     curl -fSL -o {{out}}/xiao-bootloader-update.uf2 \
         "https://github.com/0hotpotman0/BLE_52840_Core/raw/main/bootloader/Seeed_XIAO_nRF52840_Sense/update-Seeed_XIAO_nRF52840_Sense_bootloader-0.6.1_nosd.uf2"
-    @echo "Bootloader saved to {{out}}/xiao-bootloader-update.uf2"
+    @echo "Saved to {{out}}/xiao-bootloader-update.uf2"
+    @echo "Double-tap reset, then copy to XIAO-SENSE drive."
+
+# Download XIAO nRF52840 Sense bootloader (HEX — flash via J-Link after recovery)
+bootloader-hex:
+    mkdir -p {{out}}
+    curl -fSL -o /tmp/xiao-bootloader.zip \
+        "https://forum.seeedstudio.com/uploads/short-url/eSDX0bezkia89iZ77eduYRwycAt.zip"
+    python3 -c "import zipfile; zipfile.ZipFile('/tmp/xiao-bootloader.zip').extractall('{{out}}')"
+    @echo "Saved to {{out}}/Seeed_XIAO_nRF52840_Sense_bootloader-0.6.1_s140_7.3.0.hex"
+    @echo "Flash via: nrfjprog --program {{out}}/Seeed_XIAO_nRF52840_Sense_bootloader-0.6.1_s140_7.3.0.hex --verify --reset"
+
+# Flash bootloader hex via J-Link (after recovery)
+flash-bootloader-jlink:
+    just bootloader-hex
+    nrfjprog --program {{out}}/Seeed_XIAO_nRF52840_Sense_bootloader-0.6.1_s140_7.3.0.hex --verify --reset
+    @echo "Bootloader flashed. XIAO should mount as XIAO-SENSE."
 
 # Generate SVG layer diagrams
 gen-svg:
@@ -76,54 +92,24 @@ gen-svg:
 serial device="/dev/ttyACM0":
     picocom -b 115200 {{device}}
 
-# Generate a UF2 that writes UICR to enable NFC pins (P0.09/P0.10) as GPIO
-# Flash via UF2 bootloader — no SWD probe needed
-uicr-uf2:
-    #!/usr/bin/env python3
-    import struct, os
-    # UICR NFCPINS register at 0x1000120C — set bit 0 to 0 to disable NFC
-    addr = 0x10001200
-    # Build a 256-byte block: 12 bytes of 0xFF padding + our 4-byte value at offset 0x0C
-    data = bytearray(b'\xff' * 256)
-    struct.pack_into('<I', data, 0x0C, 0xFFFFFFFE)
-    # UF2 block
-    block = struct.pack('<IIIIIIII',
-        0x0A324655,  # magic start 0
-        0x9E5D5157,  # magic start 1
-        0x00002000,  # family ID present flag
-        addr,        # target address
-        256,         # payload size
-        0,           # block number
-        1,           # total blocks
-        0xADA52840,  # family ID: nRF52840
-    )
-    block += data
-    block += b'\x00' * (512 - 4 - len(block))
-    block += struct.pack('<I', 0x0AB16F30)  # magic end
-    out = os.path.join("{{out}}", "uicr-nfc-as-gpio.uf2")
-    os.makedirs("{{out}}", exist_ok=True)
-    with open(out, 'wb') as f:
-        f.write(block)
-    print(f"UF2 written to {out}")
-    print("Double-tap reset on XIAO, then copy to XIAO-SENSE drive")
+# ── SWD / J-Link commands ───────────────────────────────────────────
 
-# Unlock a chip with APPROTECT set (e.g. after RMK) via J-Link — full chip erase
+# Unlock a chip with APPROTECT set — full chip erase via J-Link
 recover-jlink:
     nrfjprog --recover
     @echo "Chip unlocked. Reflash the bootloader and firmware."
 
-# Burn UICR to enable NFC pins (P0.09/P0.10) as GPIO via J-Link
-# One-time operation — connect J-Link to XIAO BLE SWD pads first
+# Write UICR to enable NFC pins (P0.09/P0.10) as GPIO via J-Link
 uicr-jlink:
     nrfjprog --memwr 0x1000120C --val 0xFFFFFFFE
     nrfjprog --reset
-    @echo "UICR written — NFC pins are now GPIO. UF2 flashing works as normal."
+    @echo "UICR written — NFC pins are now GPIO."
 
-# Burn UICR to enable NFC pins as GPIO via OpenOCD (ST-Link or CMSIS-DAP)
-uicr-openocd probe="stlink":
+# Write UICR to enable NFC pins as GPIO via OpenOCD (CMSIS-DAP / ST-Link)
+uicr-openocd probe="cmsis-dap":
     openocd -f interface/{{probe}}.cfg -f target/nrf52.cfg \
         -c "init; halt; flash fillw 0x1000120C 0xFFFFFFFE 1; reset; exit"
-    @echo "UICR written — NFC pins are now GPIO. UF2 flashing works as normal."
+    @echo "UICR written — NFC pins are now GPIO."
 
 # Clean build artifacts
 clean:

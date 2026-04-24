@@ -22,6 +22,7 @@
       let
         pkgs = import nixpkgs {
           inherit system;
+          # nrf-command-line-tools / segger-jlink are proprietary
           config.allowUnfreePredicate = pkg:
             builtins.elem (pkgs.lib.getName pkg) [ "nrf-command-line-tools" "segger-jlink" ];
           config.permittedInsecurePackages = [ "segger-jlink-qt4-874" ];
@@ -32,22 +33,18 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            # Zephyr / ZMK build tools
+            # Zephyr / ZMK
             zephyr.pythonEnv
             (zephyr.sdk.override { targets = [ "arm-zephyr-eabi" ]; })
             cmake
             dtc
             ninja
             protobuf
-
-            # nanopb needs google.protobuf Python module
             python3Packages.protobuf
 
             # Tools
             just
             picocom
-
-            # SWD / UICR programming
             openocd
             nrf-command-line-tools
           ];

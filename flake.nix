@@ -20,7 +20,13 @@
   outputs = { self, nixpkgs, flake-utils, zephyr-nix, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfreePredicate = pkg:
+            builtins.elem (pkgs.lib.getName pkg) [ "nrf-command-line-tools" "segger-jlink" ];
+          config.permittedInsecurePackages = [ "segger-jlink-qt4-874" ];
+          config.segger-jlink.acceptLicense = true;
+        };
         zephyr = zephyr-nix.packages.${system};
       in
       {
@@ -40,6 +46,10 @@
             # Tools
             just
             picocom
+
+            # SWD / UICR programming
+            openocd
+            nrf-command-line-tools
           ];
 
           env = {

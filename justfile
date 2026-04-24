@@ -76,6 +76,55 @@ gen-svg:
 serial device="/dev/ttyACM0":
     picocom -b 115200 {{device}}
 
+# Generate a UF2 that writes UICR to enable NFC pins (P0.09/P0.10) as GPIO
+# Flash via UF2 bootloader — no SWD probe needed
+uicr-uf2:
+    #!/usr/bin/env python3
+    import struct, os
+    # UICR NFCPINS register at 0x1000120C — set bit 0 to 0 to disable NFC
+    addr = 0x10001200
+    # Build a 256-byte block: 12 bytes of 0xFF padding + our 4-byte value at offset 0x0C
+    data = bytearray(b'\xff' * 256)
+    struct.pack_into('<I', data, 0x0C, 0xFFFFFFFE)
+    # UF2 block
+    block = struct.pack('<IIIIIIII',
+        0x0A324655,  # magic start 0
+        0x9E5D5157,  # magic start 1
+        0x00002000,  # family ID present flag
+        addr,        # target address
+        256,         # payload size
+        0,           # block number
+        1,           # total blocks
+        0xADA52840,  # family ID: nRF52840
+    )
+    block += data
+    block += b'\x00' * (512 - 4 - len(block))
+    block += struct.pack('<I', 0x0AB16F30)  # magic end
+    out = os.path.join("{{out}}", "uicr-nfc-as-gpio.uf2")
+    os.makedirs("{{out}}", exist_ok=True)
+    with open(out, 'wb') as f:
+        f.write(block)
+    print(f"UF2 written to {out}")
+    print("Double-tap reset on XIAO, then copy to XIAO-SENSE drive")
+
+# Unlock a chip with APPROTECT set (e.g. after RMK) via J-Link — full chip erase
+recover-jlink:
+    nrfjprog --recover
+    @echo "Chip unlocked. Reflash the bootloader and firmware."
+
+# Burn UICR to enable NFC pins (P0.09/P0.10) as GPIO via J-Link
+# One-time operation — connect J-Link to XIAO BLE SWD pads first
+uicr-jlink:
+    nrfjprog --memwr 0x1000120C --val 0xFFFFFFFE
+    nrfjprog --reset
+    @echo "UICR written — NFC pins are now GPIO. UF2 flashing works as normal."
+
+# Burn UICR to enable NFC pins as GPIO via OpenOCD (ST-Link or CMSIS-DAP)
+uicr-openocd probe="stlink":
+    openocd -f interface/{{probe}}.cfg -f target/nrf52.cfg \
+        -c "init; halt; flash fillw 0x1000120C 0xFFFFFFFE 1; reset; exit"
+    @echo "UICR written — NFC pins are now GPIO. UF2 flashing works as normal."
+
 # Clean build artifacts
 clean:
     rm -rf {{bdir}}

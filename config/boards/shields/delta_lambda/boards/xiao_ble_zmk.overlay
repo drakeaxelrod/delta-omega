@@ -19,9 +19,6 @@
         };
     };
 };
-&uicr {
-    nfct-pins-as-gpios;
-};
 &xiao_i2c {
     status = "disabled";
 };

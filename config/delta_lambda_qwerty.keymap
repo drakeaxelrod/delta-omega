@@ -390,6 +390,18 @@
             bindings = <&kp RIGHT_SHIFT>;
             key-positions = <32 33>;
         };
+
+        combo_soft_off_left {
+            bindings = <&soft_off>;
+            key-positions = <30 31>;
+            timeout-ms = <3000>;
+        };
+
+        combo_soft_off_right {
+            bindings = <&soft_off>;
+            key-positions = <32 33>;
+            timeout-ms = <3000>;
+        };
     };
 
     // ══════════════════════════════════════════════════════════════

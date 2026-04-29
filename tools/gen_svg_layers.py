@@ -262,6 +262,9 @@ def parse_binding(binding_str):
     if behavior == "studio_unlock":
         return ("Studio", None, False)
 
+    if behavior == "soft_off":
+        return ("Off", None, False)
+
     # Fallback
     return (behavior, None, False)
 

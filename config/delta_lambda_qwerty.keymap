@@ -442,7 +442,7 @@
         util_layer {
             display-name = "UTIL";
             bindings = <
-       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &trans     &trans          &trans          &trans        &trans
+       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &trans     &trans          &trans          &trans        &soft_off
        &kp LGUI      &kp LALT      &kp LCTRL     &kp LSHFT     &bt BT_CLR        &trans     &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT
        &trans        &out OUT_TOG  &bt BT_PRV    &bt BT_NXT    &bt BT_CLR_ALL    &mkp MCLK  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT
                                                   &trans        &trans            &mkp LCLK  &mkp RCLK

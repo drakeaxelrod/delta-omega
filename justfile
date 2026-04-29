@@ -27,11 +27,11 @@ build keymap="delta_lambda":
     set -euo pipefail
     keymap_arg=""
     if [ "{{keymap}}" = "qwerty" ]; then
-        keymap_arg="-DZMK_CONFIG_KEYMAP_FILE={{config}}/delta_lambda_qwerty.keymap"
+        keymap_arg="-DKEYMAP_FILE={{config}}/delta_lambda_qwerty.keymap"
     fi
-    west build -s {{zmk_app}} -d {{bdir}}/left -b xiao_ble//zmk -- \
+    west build -s {{zmk_app}} -d {{bdir}}/left -b xiao_ble//zmk -S studio-rpc-usb-uart -- \
         -DSHIELD=delta_lambda_left -DZMK_CONFIG={{config}} $keymap_arg
-    west build -s {{zmk_app}} -d {{bdir}}/right -b xiao_ble//zmk -- \
+    west build -s {{zmk_app}} -d {{bdir}}/right -b xiao_ble//zmk -S studio-rpc-usb-uart -- \
         -DSHIELD=delta_lambda_right -DZMK_CONFIG={{config}} $keymap_arg
     west build -s {{zmk_app}} -d {{bdir}}/reset -b xiao_ble//zmk -- \
         -DSHIELD=settings_reset -DZMK_CONFIG={{config}}

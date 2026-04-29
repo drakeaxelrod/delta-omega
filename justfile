@@ -20,29 +20,28 @@ init:
 update:
     west update
 
-# Build firmware (left half acts as central via BLE)
-build: _build-left _build-right _build-reset
+# Build firmware — optional keymap argument (default: gallium, or "qwerty")
+# Usage: just build | just build qwerty
+build keymap="delta_lambda":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    keymap_arg=""
+    if [ "{{keymap}}" = "qwerty" ]; then
+        keymap_arg="-DZMK_CONFIG_KEYMAP_FILE={{config}}/delta_lambda_qwerty.keymap"
+    fi
+    west build -s {{zmk_app}} -d {{bdir}}/left -b xiao_ble//zmk -- \
+        -DSHIELD=delta_lambda_left -DZMK_CONFIG={{config}} $keymap_arg
+    west build -s {{zmk_app}} -d {{bdir}}/right -b xiao_ble//zmk -- \
+        -DSHIELD=delta_lambda_right -DZMK_CONFIG={{config}} $keymap_arg
+    west build -s {{zmk_app}} -d {{bdir}}/reset -b xiao_ble//zmk -- \
+        -DSHIELD=settings_reset -DZMK_CONFIG={{config}}
     mkdir -p {{out}}
     install -m 644 {{bdir}}/left/zephyr/zmk.uf2   {{out}}/delta-lambda-left.uf2
     install -m 644 {{bdir}}/right/zephyr/zmk.uf2   {{out}}/delta-lambda-right.uf2
     install -m 644 {{bdir}}/reset/zephyr/zmk.uf2   {{out}}/delta-lambda-reset.uf2
-    @echo ""
-    @echo "Firmware ready:"
-    @ls -1 {{out}}/delta-lambda-*.uf2
-
-# ── Internal build targets ──────────────────────────────────────────
-
-_build-left:
-    west build -s {{zmk_app}} -d {{bdir}}/left -b xiao_ble//zmk -- \
-        -DSHIELD=delta_lambda_left -DZMK_CONFIG={{config}}
-
-_build-right:
-    west build -s {{zmk_app}} -d {{bdir}}/right -b xiao_ble//zmk -- \
-        -DSHIELD=delta_lambda_right -DZMK_CONFIG={{config}}
-
-_build-reset:
-    west build -s {{zmk_app}} -d {{bdir}}/reset -b xiao_ble//zmk -- \
-        -DSHIELD=settings_reset -DZMK_CONFIG={{config}}
+    echo ""
+    echo "Firmware ready (keymap: {{keymap}}):"
+    ls -1 {{out}}/delta-lambda-*.uf2
 
 # Flash a target to plugged-in XIAO (double-tap reset first)
 # Usage: just flash left | right | reset

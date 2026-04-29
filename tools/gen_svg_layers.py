@@ -3,7 +3,7 @@
 
 Usage: python tools/gen_svg_layers.py
 
-Reads boards/shields/delta_lambda/delta_lambda.keymap, parses layer bindings,
+Reads config/delta_lambda.keymap, parses layer bindings,
 and generates one SVG per layer into assets/svg/layers/.
 """
 
@@ -12,7 +12,7 @@ from pathlib import Path
 from html import escape
 
 ROOT = Path(__file__).resolve().parent.parent
-KEYMAP = ROOT / "boards" / "shields" / "delta_lambda" / "delta_lambda.keymap"
+KEYMAP = ROOT / "config" / "delta_lambda.keymap"
 BLANK_SVG = ROOT / "assets" / "layouts" / "blank.svg"
 SVG_DIR = ROOT / "assets" / "svg" / "layers"
 

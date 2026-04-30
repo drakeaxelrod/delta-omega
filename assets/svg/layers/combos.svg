@@ -308,6 +308,10 @@
     <path d="M 569,126 Q 504.8,112.0 440.5,126.0" class="combo" />
     <path d="M 304,261 Q 372.2,275.0 440.5,261.0" class="combo" />
     <path d="M 577,261 Q 508.8,275.0 440.5,261.0" class="combo" />
+    <path d="M 304,261 Q 320.6,269.6 337.5,261.5" class="combo" />
+    <path d="M 371,262 Q 354.1,270.1 337.5,261.5" class="combo" />
+    <path d="M 510,262 Q 526.9,270.1 543.5,261.5" class="combo" />
+    <path d="M 577,261 Q 560.4,269.6 543.5,261.5" class="combo" />
     <!-- combo boxes -->
     <g transform="translate(109.5, 162.5)">
       <rect rx="4" ry="4" x="-21.4" y="-10.0" width="42.8" height="20" class="combo" />
@@ -444,6 +448,14 @@
     <g transform="translate(440.5, 261.0)">
       <rect rx="4" ry="4" x="-28.6" y="-10.0" width="57.2" height="20" class="combo" />
       <text x="0" y="0" class="combo">Studio</text>
+    </g>
+    <g transform="translate(337.5, 261.5)">
+      <rect rx="4" ry="4" x="-17.8" y="-10.0" width="35.6" height="20" class="combo" />
+      <text x="0" y="0" class="combo">Off</text>
+    </g>
+    <g transform="translate(543.5, 261.5)">
+      <rect rx="4" ry="4" x="-17.8" y="-10.0" width="35.6" height="20" class="combo" />
+      <text x="0" y="0" class="combo">Off</text>
     </g>
   </g>
 </svg>

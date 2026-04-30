@@ -293,21 +293,24 @@ def parse_combos(keymap_path):
     """Parse combo definitions from the keymap."""
     text = keymap_path.read_text()
 
-    combo_pattern = re.compile(
-        r"(\w+)\s*\{\s*"
-        r"timeout-ms\s*=\s*<\d+>;\s*"
-        r"key-positions\s*=\s*<([^>]+)>;\s*"
-        r"bindings\s*=\s*<([^>]+)>",
+    # Match combo blocks with properties in any order
+    combo_block_pattern = re.compile(
+        r"(combo_\w+)\s*\{([^}]+)\}",
         re.DOTALL,
     )
+    pos_pattern = re.compile(r"key-positions\s*=\s*<([^>]+)>")
+    bind_pattern = re.compile(r"bindings\s*=\s*<([^>]+)>")
 
     combos = []
-    for match in combo_pattern.finditer(text):
+    for match in combo_block_pattern.finditer(text):
         name = match.group(1)
-        if name == "compatible":
+        body = match.group(2)
+        pos_match = pos_pattern.search(body)
+        bind_match = bind_pattern.search(body)
+        if not pos_match or not bind_match:
             continue
-        positions = [int(p) for p in match.group(2).split()]
-        binding_str = match.group(3).strip()
+        positions = [int(p) for p in pos_match.group(1).split()]
+        binding_str = bind_match.group(1).strip()
         if binding_str.startswith("&"):
             binding_str = binding_str[1:]
         tap, _, _ = parse_binding(binding_str)

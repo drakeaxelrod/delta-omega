@@ -1,5 +1,5 @@
 {
-  description = "Delta Lambda split keyboard — ZMK firmware & config";
+  description = "Delta Omega split keyboard — ZMK firmware & config";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -54,7 +54,7 @@
           };
 
           shellHook = ''
-            echo "Delta Lambda keyboard — run 'just' to see available commands"
+            echo "Delta Omega keyboard — run 'just' to see available commands"
           '';
         };
       }

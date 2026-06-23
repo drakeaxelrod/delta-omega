@@ -1,4 +1,4 @@
-# Delta Lambda split keyboard — ZMK firmware build commands
+# Delta Omega split keyboard — ZMK firmware build commands
 
 root    := justfile_directory()
 zmk_app := root / "zmk/app"
@@ -22,26 +22,26 @@ update:
 
 # Build firmware — optional keymap argument (default: gallium, or "qwerty")
 # Usage: just build | just build qwerty
-build keymap="delta_lambda":
+build keymap="delta_omega":
     #!/usr/bin/env bash
     set -euo pipefail
     keymap_arg=""
     if [ "{{keymap}}" = "qwerty" ]; then
-        keymap_arg="-DKEYMAP_FILE={{config}}/delta_lambda_qwerty.keymap"
+        keymap_arg="-DKEYMAP_FILE={{config}}/delta_omega_qwerty.keymap"
     fi
     west build -s {{zmk_app}} -d {{bdir}}/left -b xiao_ble//zmk -S studio-rpc-usb-uart -- \
-        -DSHIELD=delta_lambda_left -DZMK_CONFIG={{config}} $keymap_arg
+        -DSHIELD=delta_omega_left -DZMK_CONFIG={{config}} $keymap_arg
     west build -s {{zmk_app}} -d {{bdir}}/right -b xiao_ble//zmk -S studio-rpc-usb-uart -- \
-        -DSHIELD=delta_lambda_right -DZMK_CONFIG={{config}} $keymap_arg
+        -DSHIELD=delta_omega_right -DZMK_CONFIG={{config}} $keymap_arg
     west build -s {{zmk_app}} -d {{bdir}}/reset -b xiao_ble//zmk -- \
         -DSHIELD=settings_reset -DZMK_CONFIG={{config}}
     mkdir -p {{out}}
-    install -m 644 {{bdir}}/left/zephyr/zmk.uf2   {{out}}/delta-lambda-left.uf2
-    install -m 644 {{bdir}}/right/zephyr/zmk.uf2   {{out}}/delta-lambda-right.uf2
-    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2   {{out}}/delta-lambda-reset.uf2
+    install -m 644 {{bdir}}/left/zephyr/zmk.uf2   {{out}}/delta-omega-left.uf2
+    install -m 644 {{bdir}}/right/zephyr/zmk.uf2   {{out}}/delta-omega-right.uf2
+    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2   {{out}}/delta-omega-reset.uf2
     echo ""
     echo "Firmware ready (keymap: {{keymap}}):"
-    ls -1 {{out}}/delta-lambda-*.uf2
+    ls -1 {{out}}/delta-omega-*.uf2
 
 # Flash a target to plugged-in XIAO (double-tap reset first)
 # Usage: just flash left | right | reset
@@ -57,7 +57,7 @@ flash target:
     if [ -z "$mountpoint" ]; then
         mountpoint="/run/media/$USER/XIAO-SENSE"
     fi
-    cp "{{out}}/delta-lambda-{{target}}.uf2" "$mountpoint/"
+    cp "{{out}}/delta-omega-{{target}}.uf2" "$mountpoint/"
     echo "Flashed {{target}}"
 
 # Download XIAO nRF52840 Sense bootloader (UF2 update — flash via bootloader drive)

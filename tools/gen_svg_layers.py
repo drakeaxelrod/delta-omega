@@ -3,7 +3,7 @@
 
 Usage: python tools/gen_svg_layers.py
 
-Reads config/delta_lambda.keymap, parses layer bindings,
+Reads config/delta_omega.keymap, parses layer bindings,
 and generates one SVG per layer into assets/svg/layers/.
 """
 
@@ -12,12 +12,12 @@ from pathlib import Path
 from html import escape
 
 ROOT = Path(__file__).resolve().parent.parent
-KEYMAP = ROOT / "config" / "delta_lambda.keymap"
+KEYMAP = ROOT / "config" / "delta_omega.keymap"
 BLANK_SVG = ROOT / "assets" / "layouts" / "blank.svg"
 SVG_DIR = ROOT / "assets" / "svg" / "layers"
 
 # ── Key position transforms (from blank.svg) ──────────────────────────
-# (x, y, rotation) — matches the 34-key delta-lambda layout
+# (x, y, rotation) — matches the 34-key delta-omega layout
 
 KEY_POSITIONS = [
     # Top row (0-9)

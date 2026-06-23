@@ -1,6 +1,6 @@
-# Delta Lambda
+# Delta Omega
 
-ZMK firmware for the Delta Lambda 34-key split keyboard, running on two Seeed XIAO nRF52840 controllers. Based on the [delta-omega](https://github.com/unspecworks/delta-omega) design.
+ZMK firmware for the Delta Omega 34-key split keyboard, running on two Seeed XIAO nRF52840 controllers. Based on the [delta-omega](https://github.com/unspecworks/delta-omega) design.
 
 ## Layout
 
@@ -65,7 +65,7 @@ Thumb layer-taps use **balanced** flavor with 200ms tapping term for fast layer 
 | Base design | [delta-omega](https://github.com/unspecworks/delta-omega) |
 | Controllers | 2x Seeed XIAO nRF52840 |
 | Keys | 34 (3x5 + 2 thumb per hand) |
-| Switches | Kailh Choc v1 / v2 (Hotswap) |
+| Switches | Kailh PG1316S (ultra-low-profile, SMD) |
 | Matrix | 4x10 (col2row) |
 | Connection | USB-C or Bluetooth (5 profiles) |
 
@@ -82,9 +82,9 @@ just update          # west update
 ```
 
 Outputs go to `build/`:
-- `delta-lambda-left.uf2` (central)
-- `delta-lambda-right.uf2` (peripheral)
-- `delta-lambda-reset.uf2` (bond/settings reset)
+- `delta-omega-left.uf2` (central)
+- `delta-omega-right.uf2` (peripheral)
+- `delta-omega-reset.uf2` (bond/settings reset)
 
 ### GitHub Actions
 
@@ -102,7 +102,7 @@ just gen-svg    # regenerates assets/svg/layers/*.svg from keymap
 2. Copy the appropriate `.uf2` file to the mounted drive
 3. Flash left half first, then right half
 
-To clear Bluetooth bonds, flash `delta-lambda-reset.uf2` on **both** halves, then reflash the regular firmware.
+To clear Bluetooth bonds, flash `delta-omega-reset.uf2` on **both** halves, then reflash the regular firmware.
 
 ## ZMK Studio
 

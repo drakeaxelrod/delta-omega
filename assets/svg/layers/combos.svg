@@ -450,12 +450,12 @@
       <text x="0" y="0" class="combo">Studio</text>
     </g>
     <g transform="translate(337.5, 261.5)">
-      <rect rx="4" ry="4" x="-17.8" y="-10.0" width="35.6" height="20" class="combo" />
-      <text x="0" y="0" class="combo">Off</text>
+      <rect rx="4" ry="4" x="-28.6" y="-10.0" width="57.2" height="20" class="combo" />
+      <text x="0" y="0" class="combo">ht_off</text>
     </g>
     <g transform="translate(543.5, 261.5)">
-      <rect rx="4" ry="4" x="-17.8" y="-10.0" width="35.6" height="20" class="combo" />
-      <text x="0" y="0" class="combo">Off</text>
+      <rect rx="4" ry="4" x="-28.6" y="-10.0" width="57.2" height="20" class="combo" />
+      <text x="0" y="0" class="combo">ht_off</text>
     </g>
   </g>
 </svg>

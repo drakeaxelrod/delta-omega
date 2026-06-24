@@ -1,6 +1,8 @@
 # Delta Omega
 
-ZMK firmware for the Delta Omega 34-key split keyboard, running on two Seeed XIAO nRF52840 controllers. Based on the [delta-omega](https://github.com/unspecworks/delta-omega) design.
+ZMK firmware & config for the [**unspecworks/delta-omega**](https://github.com/unspecworks/delta-omega) — a 34-key split keyboard running on two Seeed XIAO nRF52840 controllers with Kailh PG1316S switches.
+
+Two layouts are built from this config: **Gallium** (default) and **QWERTY**.
 
 ## Layout
 
@@ -76,19 +78,27 @@ Thumb layer-taps use **balanced** flavor with 200ms tapping term for fast layer 
 ```bash
 nix develop          # enter dev shell
 just init            # initialize west workspace (first time)
-just build           # build left + right + settings_reset
+just build           # build Gallium (left + right + settings_reset)
+just build qwerty    # build QWERTY instead
 just bootloader      # download XIAO bootloader
 just update          # west update
 ```
 
-Outputs go to `build/`:
+Outputs go to `build/` (the selected layout overwrites the previous one):
 - `delta-omega-left.uf2` (central)
 - `delta-omega-right.uf2` (peripheral)
 - `delta-omega-reset.uf2` (bond/settings reset)
 
 ### GitHub Actions
 
-Push to `config/` or `boards/` triggers a build via ZMK's reusable workflow. Download UF2 artifacts from the Actions tab.
+Pushing changes under `config/`, `tools/`, or `build.yaml` triggers `.github/workflows/build.yml`, which:
+1. regenerates the layer SVGs and commits them, then
+2. builds firmware for **both layouts** via ZMK's reusable workflow.
+
+Download the UF2 artifacts from the Actions tab:
+- `delta-omega-gallium-left` / `delta-omega-gallium-right`
+- `delta-omega-qwerty-left` / `delta-omega-qwerty-right`
+- `delta-omega-settings-reset`
 
 ### Regenerate layer SVGs
 

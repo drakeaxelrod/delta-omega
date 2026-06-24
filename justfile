@@ -25,9 +25,12 @@ update:
 build keymap="delta_omega":
     #!/usr/bin/env bash
     set -euo pipefail
-    keymap_arg=""
+    # Always pass KEYMAP_FILE explicitly so switching variants overrides the
+    # cached value in an existing build dir (an empty arg leaves the stale one).
     if [ "{{keymap}}" = "qwerty" ]; then
         keymap_arg="-DKEYMAP_FILE={{config}}/delta_omega_qwerty.keymap"
+    else
+        keymap_arg="-DKEYMAP_FILE={{config}}/delta_omega.keymap"
     fi
     west build -s {{zmk_app}} -d {{bdir}}/left -b xiao_ble//zmk -S studio-rpc-usb-uart -- \
         -DSHIELD=delta_omega_left -DZMK_CONFIG={{config}} $keymap_arg

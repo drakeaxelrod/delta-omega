@@ -9,6 +9,7 @@ result/
 zmk/
 zmk-keyboard-delta-omega/
 zmk-rgbled-widget/
+prospector-zmk-module/
 zephyr/
 modules/
 optional/

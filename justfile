@@ -135,5 +135,5 @@ uicr-openocd probe="cmsis-dap":
 
 # Clean build artifacts
 clean:
-    rm -rf {{bdir}}
-    @echo "Cleaned .build/"
+    rm -rf {{bdir}} {{out}}
+    @echo "Cleaned .build/ and build/"

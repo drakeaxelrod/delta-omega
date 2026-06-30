@@ -22,7 +22,6 @@ update:
 
 # Build ALL modes into build/<mode>/ subdirectories
 build: build-standalone build-dongle build-prospector
-    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2 {{out}}/settings-reset.uf2
     @echo ""
     @echo "All modes built under {{out}}/:"
     @ls -R {{out}}
@@ -32,6 +31,7 @@ build-standalone: _b-left-central _b-right _b-reset
     mkdir -p {{out}}/standalone
     install -m 644 {{bdir}}/left-central/zephyr/zmk.uf2 {{out}}/standalone/delta-omega-left.uf2
     install -m 644 {{bdir}}/right/zephyr/zmk.uf2         {{out}}/standalone/delta-omega-right.uf2
+    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2         {{out}}/standalone/delta-omega-reset.uf2
 
 # Screenless XIAO dongle (both halves peripheral)
 build-dongle: _b-dongle _b-left _b-right _b-reset
@@ -39,6 +39,7 @@ build-dongle: _b-dongle _b-left _b-right _b-reset
     install -m 644 {{bdir}}/dongle/zephyr/zmk.uf2 {{out}}/dongle/delta-omega-dongle.uf2
     install -m 644 {{bdir}}/left/zephyr/zmk.uf2    {{out}}/dongle/delta-omega-left.uf2
     install -m 644 {{bdir}}/right/zephyr/zmk.uf2   {{out}}/dongle/delta-omega-right.uf2
+    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2   {{out}}/dongle/delta-omega-reset.uf2
 
 # Prospector dongle (LCD)
 build-prospector: _b-prospector _b-left _b-right _b-reset
@@ -46,6 +47,7 @@ build-prospector: _b-prospector _b-left _b-right _b-reset
     install -m 644 {{bdir}}/prospector/zephyr/zmk.uf2 {{out}}/prospector/delta-omega-prospector.uf2
     install -m 644 {{bdir}}/left/zephyr/zmk.uf2         {{out}}/prospector/delta-omega-left.uf2
     install -m 644 {{bdir}}/right/zephyr/zmk.uf2        {{out}}/prospector/delta-omega-right.uf2
+    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2        {{out}}/prospector/delta-omega-reset.uf2
 
 _b-left-central:
     nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/left-central -b xiao_ble//zmk -- \

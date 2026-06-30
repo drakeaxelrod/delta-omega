@@ -34,17 +34,17 @@ KEY_POSITIONS = [
     (510, 262, -2), (577, 261, 0),
 ]
 
+LAYER_NAMES = ["base", "qwerty", "nav", "num", "fun", "util", "game"]
+LAYER_DISPLAY = ["Base (Gallium)", "QWERTY", "Nav", "Num", "Fun", "Util + Mouse", "Game"]
+
 # Which thumb position activates each layer (for "held" highlighting)
 HELD_THUMBS = {
-    1: 31,   # NAV  → hold Space thumb
-    2: 32,   # NUM  → hold Enter thumb
-    3: 33,   # FUN  → hold Backspace thumb
-    4: 30,   # UTIL → hold Escape thumb
-    # GAME (5) is toggled, no held thumb
+    2: 31,   # NAV  → hold Space thumb
+    3: 32,   # NUM  → hold Enter thumb
+    4: 33,   # FUN  → hold Backspace thumb
+    5: 30,   # UTIL → hold Escape thumb
+    # GAME (6) is toggled, no held thumb
 }
-
-LAYER_NAMES = ["base", "nav", "num", "fun", "util", "game"]
-LAYER_DISPLAY = ["Base (Gallium)", "Nav", "Num", "Fun", "Util + Mouse", "Game"]
 
 # ── Key code → display label mapping ──────────────────────────────────
 
@@ -101,10 +101,10 @@ MOD_LABELS = {
 }
 
 LAYER_LABELS = {
-    "BASE": "Base", "NAV": "Nav", "NUM": "Num",
+    "BASE": "Base", "QWERTY": "QWERTY", "NAV": "Nav", "NUM": "Num",
     "FUN": "Fun", "UTIL": "Util", "GAME": "Game",
-    "0": "Base", "1": "Nav", "2": "Num",
-    "3": "Fun", "4": "Util", "5": "Game",
+    "0": "Base", "1": "QWERTY", "2": "Nav",
+    "3": "Num", "4": "Fun", "5": "Util", "6": "Game",
 }
 
 
@@ -523,8 +523,8 @@ def main():
     combos = parse_combos(KEYMAP)
     header, footer = get_svg_header_footer()
 
-    if len(layers) != 6:
-        print(f"Warning: expected 6 layers, found {len(layers)}")
+    if len(layers) != 7:
+        print(f"Warning: expected 7 layers, found {len(layers)}")
 
     SVG_DIR.mkdir(parents=True, exist_ok=True)
 

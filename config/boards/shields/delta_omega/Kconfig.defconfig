@@ -1,23 +1,28 @@
-if SHIELD_DELTA_OMEGA_LEFT
-
+if SHIELD_DELTA_OMEGA_LEFT_CENTRAL
 config ZMK_KEYBOARD_NAME
     default "Delta Omega"
-
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+    default 1
+config ZMK_SPLIT
+    default y
+config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
+    default y
+config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_PROXY
+    default y
+endif
 
+if SHIELD_DELTA_OMEGA_LEFT
+config ZMK_KEYBOARD_NAME
+    default "Delta Omega L"
+config ZMK_SPLIT
+    default y
 endif
 
 if SHIELD_DELTA_OMEGA_RIGHT
-
 config ZMK_KEYBOARD_NAME
     default "Delta Omega R"
-
-endif
-
-if SHIELD_DELTA_OMEGA_LEFT || SHIELD_DELTA_OMEGA_RIGHT
-
 config ZMK_SPLIT
     default y
-
 endif

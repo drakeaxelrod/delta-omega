@@ -1,5 +1,11 @@
 config SHIELD_DELTA_OMEGA_LEFT
     def_bool $(shields_list_contains,delta_omega_left)
 
+config SHIELD_DELTA_OMEGA_LEFT_CENTRAL
+    def_bool $(shields_list_contains,delta_omega_left_central)
+
 config SHIELD_DELTA_OMEGA_RIGHT
     def_bool $(shields_list_contains,delta_omega_right)
+
+config SHIELD_DELTA_OMEGA_DONGLE
+    def_bool $(shields_list_contains,delta_omega_dongle)

@@ -10,4 +10,5 @@ features:
   - studio
 siblings:
   - delta_omega_left
+  - delta_omega_left_central
   - delta_omega_right

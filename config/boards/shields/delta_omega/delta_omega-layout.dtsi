@@ -1,0 +1,48 @@
+#include <physical_layouts.dtsi>
+
+/ {
+    physical_layout0: physical_layout_0 {
+        compatible = "zmk,physical-layout";
+        display-name = "Default Layout";
+        // 34-key splay built for Kailh PG1316S (ultra-low-profile SMD,
+        // 14 x 14.5 mm body, ~14 mm pitch). Coordinates are normalized to a
+        // 1u cell (100 = one key pitch); keycaps fill the cell (95 x 95) to
+        // show the small inter-cap gap typical of low-profile caps.
+        keys  //                     w  h    x    y     rot    rx     ry
+            = <&key_physical_attrs  95  95  15  158 (-2200)   65   208>
+            , <&key_physical_attrs  95  95 129   62 (-1200)  179   112>
+            , <&key_physical_attrs  95  95 253    3  (-400)  303    53>
+            , <&key_physical_attrs  95  95 370   44      0    0     0>
+            , <&key_physical_attrs  95  95 470   68      0    0     0>
+            , <&key_physical_attrs  95  95 815   68      0    0     0>
+            , <&key_physical_attrs  95  95 915   44      0    0     0>
+            , <&key_physical_attrs  95  95 1032    3    400 1082    53>
+            , <&key_physical_attrs  95  95 1156   62   1200 1206   112>
+            , <&key_physical_attrs  95  95 1270  158   2200 1320   208>
+            , <&key_physical_attrs  95  95  51  251 (-2200)  101   301>
+            , <&key_physical_attrs  95  95 149  160 (-1200)  199   210>
+            , <&key_physical_attrs  95  95 260  103  (-400)  310   153>
+            , <&key_physical_attrs  95  95 370  144      0    0     0>
+            , <&key_physical_attrs  95  95 470  168      0    0     0>
+            , <&key_physical_attrs  95  95 815  168      0    0     0>
+            , <&key_physical_attrs  95  95 915  144      0    0     0>
+            , <&key_physical_attrs  95  95 1025  103    400 1075   153>
+            , <&key_physical_attrs  95  95 1136  160   1200 1186   210>
+            , <&key_physical_attrs  95  95 1235  251   2200 1285   301>
+            , <&key_physical_attrs  95  95  86  343 (-2200)  136   393>
+            , <&key_physical_attrs  95  95 169  257 (-1200)  219   307>
+            , <&key_physical_attrs  95  95 266  203  (-400)  316   253>
+            , <&key_physical_attrs  95  95 370  244      0    0     0>
+            , <&key_physical_attrs  95  95 470  268      0    0     0>
+            , <&key_physical_attrs  95  95 815  268      0    0     0>
+            , <&key_physical_attrs  95  95 915  244      0    0     0>
+            , <&key_physical_attrs  95  95 1019  203    400 1069   253>
+            , <&key_physical_attrs  95  95 1117  257   1200 1167   307>
+            , <&key_physical_attrs  95  95 1199  343   2200 1249   393>
+            , <&key_physical_attrs  95  95 357  368      0    0     0>
+            , <&key_physical_attrs  95  95 469  370    200  519   420>
+            , <&key_physical_attrs  95  95 817  370  (-200)  867   420>
+            , <&key_physical_attrs  95  95 928  368      0    0     0>
+            ;
+    };
+};

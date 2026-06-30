@@ -20,22 +20,15 @@ init:
 update:
     west update
 
-# Build firmware — optional keymap argument (default: gallium, or "qwerty")
-# Usage: just build | just build qwerty
-build keymap="delta_omega":
+# Build firmware
+# Usage: just build
+build:
     #!/usr/bin/env bash
     set -euo pipefail
-    # Always pass KEYMAP_FILE explicitly so switching variants overrides the
-    # cached value in an existing build dir (an empty arg leaves the stale one).
-    if [ "{{keymap}}" = "qwerty" ]; then
-        keymap_arg="-DKEYMAP_FILE={{config}}/delta_omega_qwerty.keymap"
-    else
-        keymap_arg="-DKEYMAP_FILE={{config}}/delta_omega.keymap"
-    fi
     west build -s {{zmk_app}} -d {{bdir}}/left -b xiao_ble//zmk -S studio-rpc-usb-uart -- \
-        -DSHIELD=delta_omega_left -DZMK_CONFIG={{config}} $keymap_arg
+        -DSHIELD=delta_omega_left -DZMK_CONFIG={{config}}
     west build -s {{zmk_app}} -d {{bdir}}/right -b xiao_ble//zmk -S studio-rpc-usb-uart -- \
-        -DSHIELD=delta_omega_right -DZMK_CONFIG={{config}} $keymap_arg
+        -DSHIELD=delta_omega_right -DZMK_CONFIG={{config}}
     west build -s {{zmk_app}} -d {{bdir}}/reset -b xiao_ble//zmk -- \
         -DSHIELD=settings_reset -DZMK_CONFIG={{config}}
     mkdir -p {{out}}
@@ -43,7 +36,7 @@ build keymap="delta_omega":
     install -m 644 {{bdir}}/right/zephyr/zmk.uf2   {{out}}/delta-omega-right.uf2
     install -m 644 {{bdir}}/reset/zephyr/zmk.uf2   {{out}}/delta-omega-reset.uf2
     echo ""
-    echo "Firmware ready (keymap: {{keymap}}):"
+    echo "Firmware ready:"
     ls -1 {{out}}/delta-omega-*.uf2
 
 # Flash a target to plugged-in XIAO (double-tap reset first)

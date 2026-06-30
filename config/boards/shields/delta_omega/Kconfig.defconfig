@@ -1,3 +1,26 @@
+if SHIELD_DELTA_OMEGA_DONGLE
+config ZMK_KEYBOARD_NAME
+    default "Delta Omega"
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+config ZMK_SPLIT
+    default y
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+    default 2
+config BT_MAX_CONN
+    default 7
+config BT_MAX_PAIRED
+    default 7
+config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
+    default y
+config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_PROXY
+    default y
+config ZMK_USB_BOOT
+    default y
+config ZMK_SLEEP
+    default n
+endif
+
 if SHIELD_DELTA_OMEGA_LEFT_CENTRAL
 config ZMK_KEYBOARD_NAME
     default "Delta Omega"

@@ -18,29 +18,56 @@ init:
 
 # Update west modules (ZMK, Zephyr, etc.)
 update:
-    west update
+    nix develop -c west update
 
-# Build firmware
-# Usage: just build
-build:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    west build -s {{zmk_app}} -d {{bdir}}/left -b xiao_ble//zmk -S studio-rpc-usb-uart -- \
+# Build ALL modes into build/<mode>/ subdirectories
+build: build-standalone build-dongle build-prospector
+    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2 {{out}}/settings-reset.uf2
+    @echo ""
+    @echo "All modes built under {{out}}/:"
+    @ls -R {{out}}
+
+# Standalone (left half is central, no dongle)
+build-standalone: _b-left-central _b-right _b-reset
+    mkdir -p {{out}}/standalone
+    install -m 644 {{bdir}}/left-central/zephyr/zmk.uf2 {{out}}/standalone/delta-omega-left.uf2
+    install -m 644 {{bdir}}/right/zephyr/zmk.uf2         {{out}}/standalone/delta-omega-right.uf2
+
+# Screenless XIAO dongle (both halves peripheral)
+build-dongle: _b-dongle _b-left _b-right _b-reset
+    mkdir -p {{out}}/dongle
+    install -m 644 {{bdir}}/dongle/zephyr/zmk.uf2 {{out}}/dongle/delta-omega-dongle.uf2
+    install -m 644 {{bdir}}/left/zephyr/zmk.uf2    {{out}}/dongle/delta-omega-left.uf2
+    install -m 644 {{bdir}}/right/zephyr/zmk.uf2   {{out}}/dongle/delta-omega-right.uf2
+
+# Prospector dongle (LCD)
+build-prospector: _b-prospector _b-left _b-right _b-reset
+    mkdir -p {{out}}/prospector
+    install -m 644 {{bdir}}/prospector/zephyr/zmk.uf2 {{out}}/prospector/delta-omega-prospector.uf2
+    install -m 644 {{bdir}}/left/zephyr/zmk.uf2         {{out}}/prospector/delta-omega-left.uf2
+    install -m 644 {{bdir}}/right/zephyr/zmk.uf2        {{out}}/prospector/delta-omega-right.uf2
+
+_b-left-central:
+    nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/left-central -b xiao_ble//zmk -- \
+        -DSHIELD=delta_omega_left_central -DZMK_CONFIG={{config}}
+_b-left:
+    nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/left -b xiao_ble//zmk -- \
         -DSHIELD=delta_omega_left -DZMK_CONFIG={{config}}
-    west build -s {{zmk_app}} -d {{bdir}}/right -b xiao_ble//zmk -S studio-rpc-usb-uart -- \
+_b-right:
+    nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/right -b xiao_ble//zmk -- \
         -DSHIELD=delta_omega_right -DZMK_CONFIG={{config}}
-    west build -s {{zmk_app}} -d {{bdir}}/reset -b xiao_ble//zmk -- \
+_b-dongle:
+    nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/dongle -b xiao_ble//zmk -- \
+        -DSHIELD=delta_omega_dongle -DZMK_CONFIG={{config}} -DSNIPPET=studio-rpc-usb-uart
+_b-prospector:
+    nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/prospector -b xiao_ble//zmk -- \
+        "-DSHIELD=delta_omega_dongle prospector_adapter" -DZMK_CONFIG={{config}} -DSNIPPET=studio-rpc-usb-uart
+_b-reset:
+    nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/reset -b xiao_ble//zmk -- \
         -DSHIELD=settings_reset -DZMK_CONFIG={{config}}
-    mkdir -p {{out}}
-    install -m 644 {{bdir}}/left/zephyr/zmk.uf2   {{out}}/delta-omega-left.uf2
-    install -m 644 {{bdir}}/right/zephyr/zmk.uf2   {{out}}/delta-omega-right.uf2
-    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2   {{out}}/delta-omega-reset.uf2
-    echo ""
-    echo "Firmware ready:"
-    ls -1 {{out}}/delta-omega-*.uf2
 
 # Flash a target to plugged-in XIAO (double-tap reset first)
-# Usage: just flash left | right | reset
+# Usage: just flash <mode>/<target>  e.g. just flash standalone/delta-omega-left
 flash target:
     #!/usr/bin/env bash
     set -euo pipefail
@@ -53,7 +80,7 @@ flash target:
     if [ -z "$mountpoint" ]; then
         mountpoint="/run/media/$USER/XIAO-SENSE"
     fi
-    cp "{{out}}/delta-omega-{{target}}.uf2" "$mountpoint/"
+    cp "{{out}}/{{target}}.uf2" "$mountpoint/"
     echo "Flashed {{target}}"
 
 # Download XIAO nRF52840 Sense bootloader (UF2 update — flash via bootloader drive)
@@ -81,7 +108,7 @@ flash-bootloader-jlink:
 
 # Generate SVG layer diagrams
 gen-svg:
-    python tools/gen_svg_layers.py
+    python3 tools/gen_svg_layers.py
 
 # Open serial console
 serial device="/dev/ttyACM0":

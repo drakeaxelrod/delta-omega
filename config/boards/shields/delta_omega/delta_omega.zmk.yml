@@ -1,0 +1,13 @@
+file_format: "1"
+id: delta_omega
+name: Delta Omega
+type: shield
+url: https://github.com/drakeaxelrod/delta-omega
+requires:
+  - seeed_xiao
+features:
+  - keys
+  - studio
+siblings:
+  - delta_omega_left
+  - delta_omega_right

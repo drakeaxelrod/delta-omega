@@ -12,8 +12,5 @@ manifest:
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: main
-    - name: zmk-keyboard-delta-omega
-      url: https://github.com/drakeaxelrod/zmk-keyboard-delta-omega
-      revision: main
   self:
     path: config

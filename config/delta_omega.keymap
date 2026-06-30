@@ -18,11 +18,12 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define BASE   0
-#define NAV    1
-#define NUM    2
-#define FUN    3
-#define UTIL   4
-#define GAME   5
+#define QWERTY 1
+#define NAV    2
+#define NUM    3
+#define FUN    4
+#define UTIL   5
+#define GAME   6
 
 // Key position groups (34-key, no side keys):
 //          0  1  2  3  4     5  6  7  8  9       <- top
@@ -405,7 +406,7 @@
     };
 
     // ══════════════════════════════════════════════════════════════
-    // Keymap — 6 layers
+    // Keymap — 7 layers
     // ══════════════════════════════════════════════════════════════
 
     keymap {
@@ -418,6 +419,16 @@
        &hml LGUI N  &hml LALT R  &hml LCTRL T     &hml LSHFT S             &kp G    &kp P  &hmr RSHFT H             &hmr RCTRL A          &hmr RALT E  &hmr RGUI I
        &kp X        &kp Q        &kp M            &hml LS(LC(LA(LGUI))) W  &kp Z    &kp K  &hmr RS(RC(RA(RGUI))) F  &kp SQT               &kp SEMI     &kp PERIOD
                                                    &lt_th UTIL ESC         &lt_th NAV SPACE    &lt_th NUM ENTER         &lt_th FUN BACKSPACE
+            >;
+        };
+
+        qwerty_layer {
+            display-name = "QWERTY";
+            bindings = <
+       &kp Q        &kp W        &kp E            &kp R                    &kp T    &kp Y  &kp U                    &kp I                 &kp O        &kp P
+       &hml LGUI A  &hml LALT S  &hml LCTRL D     &hml LSHFT F             &kp G    &kp H  &hmr RSHFT J             &hmr RCTRL K          &hmr RALT L  &hmr RGUI SEMI
+       &kp Z        &kp X        &kp C            &hml LS(LC(LA(LGUI))) V  &kp B    &kp N  &hmr RS(RC(RA(RGUI))) M  &kp COMMA             &kp DOT      &kp FSLH
+                                                  &trans        &trans            &trans     &trans
             >;
         };
 
@@ -446,7 +457,7 @@
             bindings = <
        &trans  &kp F7  &kp F8  &kp F9  &kp F10    &kp PSCRN        &kp C_VOL_DN  &kp C_VOL_UP  &kp C_MUTE  &kp SLCK
        &trans  &kp F4  &kp F5  &kp F6  &kp F11    &kp C_PP         &kp LSHFT     &kp LCTRL     &kp LALT    &kp LGUI
-       &trans  &kp F1  &kp F2  &kp F3  &kp F12    &kp PAUSE_BREAK  &kp C_BRI_DN  &kp C_BRI_UP  &trans      &tog 5
+       &trans  &kp F1  &kp F2  &kp F3  &kp F12    &kp PAUSE_BREAK  &kp C_BRI_DN  &kp C_BRI_UP  &trans      &tog GAME
                                 &trans  &trans     &kp C_PREV       &kp C_NEXT
             >;
         };
@@ -454,7 +465,7 @@
         util_layer {
             display-name = "UTIL";
             bindings = <
-       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &trans     &trans          &trans          &trans        &trans
+       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &trans     &trans          &trans          &trans        &tog QWERTY
        &kp LGUI      &kp LALT      &kp LCTRL     &kp LSHFT     &bt BT_CLR        &trans     &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT
        &trans        &out OUT_TOG  &bt BT_PRV    &bt BT_NXT    &bt BT_CLR_ALL    &mkp MCLK  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT
                                                   &trans        &trans            &mkp LCLK  &mkp RCLK
@@ -466,7 +477,7 @@
             bindings = <
        &kp TAB         &kp Q         &kp UP_ARROW  &kp E            &kp R     &kp N1  &kp N2     &kp N3         &kp N4   &kp N5
        &kp LEFT_SHIFT  &kp LEFT      &kp DOWN      &kp RIGHT_ARROW  &kp G     &kp N6  &kp N7     &kp N8         &kp N9   &kp N0
-       &kp LCTRL       &kp LEFT_GUI  &kp X         &kp C            &kp V     &kp N   &kp M      &kp COMMA      &kp DOT  &tog 5
+       &kp LCTRL       &kp LEFT_GUI  &kp X         &kp C            &kp V     &kp N   &kp M      &kp COMMA      &kp DOT  &tog GAME
                                                     &kp ESC          &kp SPACE    &kp ENTER  &kp BACKSPACE
             >;
         };

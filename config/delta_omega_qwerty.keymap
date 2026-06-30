@@ -329,7 +329,7 @@
         combo_copy {
             timeout-ms = <40>;
             key-positions = <21 22>;
-            bindings = <&kp LC(C)>;
+            bindings = <&kp LC(LS(C))>;
             require-prior-idle-ms = <280>;
             layers = <BASE>;
         };
@@ -337,7 +337,7 @@
         combo_paste {
             timeout-ms = <40>;
             key-positions = <22 23>;
-            bindings = <&kp LC(V)>;
+            bindings = <&kp LC(LS(V))>;
             require-prior-idle-ms = <280>;
             layers = <BASE>;
         };

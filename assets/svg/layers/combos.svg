@@ -261,12 +261,12 @@
     <path d="M 761,190 Q 773.1,178.9 771.5,162.5" class="combo" />
     <path d="M 120,190 Q 118.2,206.6 130.5,218.0" class="combo" />
     <path d="M 141,246 Q 128.8,234.6 130.5,218.0" class="combo" />
-    <path d="M 179,136 Q 177.5,146.5 185.0,154.04166666668243" class="combo" />
-    <path d="M 191,194 Q 178.0,175.5 185.0,154.04166666668243" class="combo" />
-    <path d="M 246,102 Q 237.8,120.8 248.0,138.66666666666666" class="combo" />
-    <path d="M 250,162 Q 243.2,150.8 248.0,138.66666666666666" class="combo" />
-    <path d="M 312,126 Q 305.4,139.2 312.0,152.4375" class="combo" />
-    <path d="M 312,186 Q 303.6,169.2 312.0,152.4375" class="combo" />
+    <path d="M 179,136 Q 176.1,149.2 185.0,159.5" class="combo" />
+    <path d="M 191,194 Q 179.4,178.2 185.0,159.5" class="combo" />
+    <path d="M 246,102 Q 237.9,120.7 248.0,138.421875" class="combo" />
+    <path d="M 250,162 Q 243.1,150.7 248.0,138.421875" class="combo" />
+    <path d="M 312,126 L 312.0,139.99741716186205" class="combo" />
+    <path d="M 312,186 Q 300.5,163.0 312.0,139.99741716186205" class="combo" />
     <path d="M 372,141 Q 364.5,156.0 372.0,171.0" class="combo" />
     <path d="M 372,201 Q 364.5,186.0 372.0,171.0" class="combo" />
     <path d="M 509,141 Q 516.5,156.0 509.0,171.0" class="combo" />
@@ -291,19 +291,19 @@
     <path d="M 702,136 Q 689.5,119.1 668.5,119.0" class="combo" />
     <path d="M 702,136 Q 723.5,142.1 731.5,163.0" class="combo" />
     <path d="M 761,190 Q 753.0,169.1 731.5,163.0" class="combo" />
-    <path d="M 191,194 Q 201.6,178.7 220.15,178.04166666665878" class="combo" />
-    <path d="M 250,162 Q 231.1,162.6 220.15,178.04166666665878" class="combo" />
-    <path d="M 250,162 Q 262.1,177.1 281.35,176.4375" class="combo" />
-    <path d="M 312,186 Q 294.3,188.9 281.35,176.4375" class="combo" />
-    <path d="M 191,194 Q 219.4,211.9 251.5,202.04166666665878" class="combo" />
-    <path d="M 312,186 Q 278.2,180.5 251.5,202.04166666665878" class="combo" />
+    <path d="M 191,194 Q 201.3,210.4 220.5,211.9973745048046" class="combo" />
+    <path d="M 250,162 Q 223.2,179.9 220.5,211.9973745048046" class="combo" />
+    <path d="M 250,162 Q 265.0,170.7 281.0,163.99739583333331" class="combo" />
+    <path d="M 312,186 Q 291.0,182.7 281.0,163.99739583333331" class="combo" />
+    <path d="M 191,194 Q 222.6,204.9 251.5,187.99739583333331" class="combo" />
+    <path d="M 312,186 Q 282.2,201.0 251.5,187.99739583333331" class="combo" />
     <path d="M 569,186 Q 588.2,188.1 601.3333333333321,174.0" class="combo" />
     <path d="M 631,162 Q 619.2,175.4 601.3333333333321,174.0" class="combo" />
     <path d="M 631,162 Q 649.8,162.6 660.5,178.0" class="combo" />
     <path d="M 690,194 Q 679.2,178.6 660.5,178.0" class="combo" />
-    <path d="M 179,136 Q 208.1,112.0 245.66666666666666,114.66666666666666" class="combo" />
-    <path d="M 246,102 L 245.66666666666666,114.66666666666666" class="combo" />
-    <path d="M 312,126 Q 281.2,106.5 245.66666666666666,114.66666666666666" class="combo" />
+    <path d="M 179,136 Q 208.0,111.9 245.66666666666666,114.42187499999999" class="combo" />
+    <path d="M 246,102 L 245.66666666666666,114.42187499999999" class="combo" />
+    <path d="M 312,126 Q 281.2,106.4 245.66666666666666,114.42187499999999" class="combo" />
     <path d="M 312,126 Q 376.2,112.0 440.5,126.0" class="combo" />
     <path d="M 569,126 Q 504.8,112.0 440.5,126.0" class="combo" />
     <path d="M 304,261 Q 372.2,275.0 440.5,261.0" class="combo" />
@@ -357,15 +357,15 @@
       <rect rx="4" ry="4" x="-21.4" y="-10.0" width="42.8" height="20" class="combo" />
       <text x="0" y="0" class="combo">Mute</text>
     </g>
-    <g transform="translate(185.0, 154.04166666668243)">
+    <g transform="translate(185.0, 159.5)">
       <rect rx="4" ry="4" x="-14.0" y="-10.0" width="28" height="20" class="combo" />
       <text x="0" y="0" class="combo">`</text>
     </g>
-    <g transform="translate(248.0, 138.66666666666666)">
+    <g transform="translate(248.0, 138.421875)">
       <rect rx="4" ry="4" x="-14.0" y="-10.0" width="28" height="20" class="combo" />
       <text x="0" y="0" class="combo">\</text>
     </g>
-    <g transform="translate(312.0, 152.4375)">
+    <g transform="translate(312.0, 139.99741716186205)">
       <rect rx="4" ry="4" x="-14.0" y="-10.0" width="28" height="20" class="combo" />
       <text x="0" y="0" class="combo">=</text>
     </g>
@@ -417,15 +417,15 @@
       <rect rx="4" ry="4" x="-14.0" y="-10.0" width="28" height="20" class="combo" />
       <text x="0" y="0" class="combo">&gt;</text>
     </g>
-    <g transform="translate(220.15, 178.04166666665878)">
-      <rect rx="4" ry="4" x="-28.6" y="-10.0" width="57.2" height="20" class="combo" />
-      <text x="0" y="0" class="combo">Ctrl+C</text>
+    <g transform="translate(220.5, 211.9973745048046)">
+      <rect rx="4" ry="4" x="-43.0" y="-10.0" width="86.0" height="20" class="combo" />
+      <text x="0" y="0" class="combo">Ctrl+Shf+C</text>
     </g>
-    <g transform="translate(281.35, 176.4375)">
-      <rect rx="4" ry="4" x="-28.6" y="-10.0" width="57.2" height="20" class="combo" />
-      <text x="0" y="0" class="combo">Ctrl+V</text>
+    <g transform="translate(281.0, 163.99739583333331)">
+      <rect rx="4" ry="4" x="-43.0" y="-10.0" width="86.0" height="20" class="combo" />
+      <text x="0" y="0" class="combo">Ctrl+Shf+V</text>
     </g>
-    <g transform="translate(251.5, 202.04166666665878)">
+    <g transform="translate(251.5, 187.99739583333331)">
       <rect rx="4" ry="4" x="-28.6" y="-10.0" width="57.2" height="20" class="combo" />
       <text x="0" y="0" class="combo">Ctrl+X</text>
     </g>
@@ -437,7 +437,7 @@
       <rect rx="4" ry="4" x="-14.0" y="-10.0" width="28" height="20" class="combo" />
       <text x="0" y="0" class="combo">}</text>
     </g>
-    <g transform="translate(245.66666666666666, 114.66666666666666)">
+    <g transform="translate(245.66666666666666, 114.42187499999999)">
       <rect rx="4" ry="4" x="-17.8" y="-10.0" width="35.6" height="20" class="combo" />
       <text x="0" y="0" class="combo">Tab</text>
     </g>

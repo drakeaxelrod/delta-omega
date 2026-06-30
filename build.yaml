@@ -1,14 +1,28 @@
 ---
 include:
+  # Standalone (left = central)
   - board: xiao_ble//zmk
-    shield: delta_omega_left
+    shield: delta_omega_left_central
     snippet: studio-rpc-usb-uart zmk-usb-logging
-    artifact-name: delta-omega-left
+    artifact-name: delta-omega-standalone-left
   - board: xiao_ble//zmk
     shield: delta_omega_right
-    snippet: studio-rpc-usb-uart zmk-usb-logging
     artifact-name: delta-omega-right
-  # ── Settings reset (layout-independent) ──
+  # Peripheral left (for dongle modes)
+  - board: xiao_ble//zmk
+    shield: delta_omega_left
+    artifact-name: delta-omega-left-peripheral
+  # Screenless dongle
+  - board: xiao_ble//zmk
+    shield: delta_omega_dongle
+    snippet: studio-rpc-usb-uart zmk-usb-logging
+    artifact-name: delta-omega-dongle
+  # Prospector dongle
+  - board: xiao_ble//zmk
+    shield: delta_omega_dongle prospector_adapter
+    snippet: studio-rpc-usb-uart
+    artifact-name: delta-omega-prospector
+  # Settings reset
   - board: xiao_ble//zmk
     shield: settings_reset
     artifact-name: delta-omega-settings-reset

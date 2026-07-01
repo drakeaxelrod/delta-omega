@@ -34,20 +34,22 @@ build-standalone: _b-left-central _b-right _b-reset
     install -m 644 {{bdir}}/reset/zephyr/zmk.uf2         {{out}}/standalone/delta-omega-reset.uf2
 
 # Screenless XIAO dongle (both halves peripheral)
-build-dongle: _b-dongle _b-left _b-right _b-reset
+build-dongle: _b-dongle _b-left _b-right _b-reset _b-dongle-reset
     mkdir -p {{out}}/dongle
-    install -m 644 {{bdir}}/dongle/zephyr/zmk.uf2 {{out}}/dongle/delta-omega-dongle.uf2
-    install -m 644 {{bdir}}/left/zephyr/zmk.uf2    {{out}}/dongle/delta-omega-left.uf2
-    install -m 644 {{bdir}}/right/zephyr/zmk.uf2   {{out}}/dongle/delta-omega-right.uf2
-    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2   {{out}}/dongle/delta-omega-reset.uf2
+    install -m 644 {{bdir}}/dongle/zephyr/zmk.uf2       {{out}}/dongle/delta-omega-dongle.uf2
+    install -m 644 {{bdir}}/left/zephyr/zmk.uf2          {{out}}/dongle/delta-omega-left.uf2
+    install -m 644 {{bdir}}/right/zephyr/zmk.uf2         {{out}}/dongle/delta-omega-right.uf2
+    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2         {{out}}/dongle/delta-omega-reset.uf2
+    install -m 644 {{bdir}}/dongle-reset/zephyr/zmk.uf2  {{out}}/dongle/delta-omega-dongle-reset.uf2
 
 # Prospector dongle (LCD)
-build-prospector: _b-prospector _b-left _b-right _b-reset
+build-prospector: _b-prospector _b-left _b-right _b-reset _b-dongle-reset
     mkdir -p {{out}}/prospector
-    install -m 644 {{bdir}}/prospector/zephyr/zmk.uf2 {{out}}/prospector/delta-omega-prospector.uf2
-    install -m 644 {{bdir}}/left/zephyr/zmk.uf2         {{out}}/prospector/delta-omega-left.uf2
-    install -m 644 {{bdir}}/right/zephyr/zmk.uf2        {{out}}/prospector/delta-omega-right.uf2
-    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2        {{out}}/prospector/delta-omega-reset.uf2
+    install -m 644 {{bdir}}/prospector/zephyr/zmk.uf2    {{out}}/prospector/delta-omega-prospector.uf2
+    install -m 644 {{bdir}}/left/zephyr/zmk.uf2           {{out}}/prospector/delta-omega-left.uf2
+    install -m 644 {{bdir}}/right/zephyr/zmk.uf2          {{out}}/prospector/delta-omega-right.uf2
+    install -m 644 {{bdir}}/reset/zephyr/zmk.uf2          {{out}}/prospector/delta-omega-reset.uf2
+    install -m 644 {{bdir}}/dongle-reset/zephyr/zmk.uf2   {{out}}/prospector/delta-omega-dongle-reset.uf2
 
 _b-left-central:
     nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/left-central -b xiao_ble//zmk -- \
@@ -67,6 +69,10 @@ _b-prospector:
 _b-reset:
     nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/reset -b xiao_ble//zmk -- \
         -DSHIELD=settings_reset -DZMK_CONFIG={{config}}
+# Dongle-bootable reset (0x1000) — clears bonds/settings on the dongle XIAO
+_b-dongle-reset:
+    nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/dongle-reset -b xiao_ble//zmk -- \
+        -DSHIELD=delta_omega_reset -DZMK_CONFIG={{config}}
 
 # Flash a target to plugged-in XIAO (double-tap reset first)
 # Usage: just flash <mode>/<target>  e.g. just flash standalone/delta-omega-left

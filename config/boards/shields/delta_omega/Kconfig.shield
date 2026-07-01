@@ -9,3 +9,6 @@ config SHIELD_DELTA_OMEGA_RIGHT
 
 config SHIELD_DELTA_OMEGA_DONGLE
     def_bool $(shields_list_contains,delta_omega_dongle)
+
+config SHIELD_DELTA_OMEGA_RESET
+    def_bool $(shields_list_contains,delta_omega_reset)

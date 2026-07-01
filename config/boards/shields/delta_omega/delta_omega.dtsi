@@ -2,6 +2,20 @@
 #include "delta_omega-layout.dtsi"
 #include <behaviors/rgbled_widget.dtsi>
 
+/* All Delta Omega XIAOs use the SoftDevice-less bootloader (app at 0x1000).
+ * Must match the dongle so split BLE bonds across all three devices. */
+&flash0 {
+	partitions {
+		/delete-node/ partition@1000;
+		/delete-node/ partition@27000;
+
+		code_partition: partition@1000 {
+			label = "code_partition";
+			reg = <0x00001000 0x000ec000>;
+		};
+	};
+};
+
 &physical_layout0 {
     kscan = <&kscan0>;
     transform = <&default_transform>;

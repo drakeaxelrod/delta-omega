@@ -68,7 +68,7 @@ _b-prospector:
         "-DSHIELD=delta_omega_dongle prospector_adapter" -DZMK_CONFIG={{config}} -DSNIPPET=studio-rpc-usb-uart
 _b-reset:
     nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/reset -b xiao_ble//zmk -- \
-        -DSHIELD=settings_reset -DZMK_CONFIG={{config}}
+        -DSHIELD=delta_omega_reset -DZMK_CONFIG={{config}}
 # Dongle-bootable reset (0x1000) — clears bonds/settings on the dongle XIAO
 _b-dongle-reset:
     nix develop -c west build -p always -s {{zmk_app}} -d {{bdir}}/dongle-reset -b xiao_ble//zmk -- \

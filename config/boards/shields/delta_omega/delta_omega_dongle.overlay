@@ -1,6 +1,21 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include "delta_omega-layout.dtsi"
 
+/* Dongle XIAO uses a SoftDevice-less bootloader that expects the app at 0x1000
+ * (Zephyr BLE controller layout). Without this the app links at 0x27000 and
+ * the bootloader faults straight back to UF2 mode. Matches totem_dongle. */
+&flash0 {
+	partitions {
+		/delete-node/ partition@1000;
+		/delete-node/ partition@27000;
+
+		code_partition: partition@1000 {
+			label = "code_partition";
+			reg = <0x00001000 0x000ec000>;
+		};
+	};
+};
+
 / {
     chosen {
         zmk,kscan = &mock_kscan;

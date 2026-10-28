@@ -42,6 +42,32 @@
 &msc { time-to-max-speed-ms = <MOUSE_TIME_TO_MAX_SPEED>; };
 
 / {
+    macros {
+        bt_nxt: bt_nxt {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_NXT>, <&ind_nxt>;
+        };
+
+        bt_prv: bt_prv {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_PRV>, <&ind_prv>;
+        };
+
+        bt_clr: bt_clr {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_CLR>, <&ind_clr>;
+        };
+
+        bt_clr_all: bt_clr_all {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_CLR_ALL>, <&ind_clr_all>;
+        };
+    };
+
     behaviors {
         // ── Home Row Mods (left hand) ──
         // Positional: hold only triggers on right-hand keys + thumbs
@@ -466,8 +492,8 @@
             display-name = "UTIL";
             bindings = <
        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &trans     &trans          &trans          &trans        &tog QWERTY
-       &kp LGUI      &kp LALT      &kp LCTRL     &kp LSHFT     &bt BT_CLR        &trans     &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT
-       &trans        &out OUT_TOG  &bt BT_PRV    &bt BT_NXT    &bt BT_CLR_ALL    &mkp MCLK  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT
+       &kp LGUI      &kp LALT      &kp LCTRL     &kp LSHFT     &bt_clr           &trans     &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT
+       &trans        &out OUT_TOG  &bt_prv       &bt_nxt       &bt_clr_all       &mkp MCLK  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT
                                                   &trans        &trans            &mkp LCLK  &mkp RCLK
             >;
         };

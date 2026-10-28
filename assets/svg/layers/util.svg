@@ -145,7 +145,7 @@
     </g>
     <g transform="translate(372, 141)" class="key keypos-14">
       <rect rx="6" ry="6" x="-28" y="-26" width="55" height="52" class="key" />
-      <text x="0" y="0" class="key tap">bt_clr</text>
+      <text x="0" y="0" class="key tap">BTClr</text>
     </g>
     <g transform="translate(509, 141)" class="key keypos-15">
       <rect rx="6" ry="6" x="-28" y="-26" width="55" height="52" class="key" />
@@ -177,15 +177,15 @@
     </g>
     <g transform="translate(250, 162) rotate(-4.0)" class="key keypos-22">
       <rect rx="6" ry="6" x="-28" y="-26" width="55" height="52" class="key" />
-      <text x="0" y="0" class="key tap">bt_prv</text>
+      <text x="0" y="0" class="key tap">BTPrv</text>
     </g>
     <g transform="translate(312, 186)" class="key keypos-23">
       <rect rx="6" ry="6" x="-28" y="-26" width="55" height="52" class="key" />
-      <text x="0" y="0" class="key tap">bt_nxt</text>
+      <text x="0" y="0" class="key tap">BTNxt</text>
     </g>
     <g transform="translate(372, 201)" class="key keypos-24">
       <rect rx="6" ry="6" x="-28" y="-26" width="55" height="52" class="key" />
-      <text x="0" y="0" class="key tap">bt_clr_all</text>
+      <text x="0" y="0" class="key tap">ClrAll</text>
     </g>
     <g transform="translate(509, 201)" class="key keypos-25">
       <rect rx="6" ry="6" x="-28" y="-26" width="55" height="52" class="key" />

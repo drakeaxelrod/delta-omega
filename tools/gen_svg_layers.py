@@ -265,6 +265,21 @@ def parse_binding(binding_str):
     if behavior == "soft_off":
         return ("Off", None, False)
 
+    if behavior == "ht_off":
+        return ("Off", None, False)
+
+    if behavior == "bt_nxt":
+        return ("BTNxt", None, False)
+
+    if behavior == "bt_prv":
+        return ("BTPrv", None, False)
+
+    if behavior == "bt_clr":
+        return ("BTClr", None, False)
+
+    if behavior == "bt_clr_all":
+        return ("ClrAll", None, False)
+
     # Fallback
     return (behavior, None, False)
 

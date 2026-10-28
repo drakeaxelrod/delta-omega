@@ -2,8 +2,6 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: drakeaxelrod
-      url-base: https://github.com/drakeaxelrod
     - name: carrefinho
       url-base: https://github.com/carrefinho
   projects:
@@ -11,9 +9,6 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: zmk-rgbled-widget
-      remote: drakeaxelrod
-      revision: main
     - name: prospector-zmk-module
       remote: carrefinho
       revision: feat/new-status-screens

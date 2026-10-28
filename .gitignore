@@ -10,7 +10,8 @@ zmk/
 zmk-keyboard-delta-omega/
 zmk-rgbled-widget/
 prospector-zmk-module/
-zephyr/
+zephyr/*
+!zephyr/module.yml
 modules/
 optional/
 .vscode/

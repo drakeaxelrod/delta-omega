@@ -1,0 +1,39 @@
+/ {
+    behaviors {
+        /omit-if-no-ref/ ind_bat: ind_bat {
+            compatible = "zmk,behavior-rgbled-widget";
+            #binding-cells = <0>;
+            indicate-battery;
+        };
+        /omit-if-no-ref/ ind_con: ind_con {
+            compatible = "zmk,behavior-rgbled-widget";
+            #binding-cells = <0>;
+            indicate-connectivity;
+        };
+        /omit-if-no-ref/ ind_lyr: ind_lyr {
+            compatible = "zmk,behavior-rgbled-widget";
+            #binding-cells = <0>;
+            indicate-layer;
+        };
+        /omit-if-no-ref/ ind_nxt: ind_nxt {
+            compatible = "zmk,behavior-rgbled-widget";
+            #binding-cells = <0>;
+            indicate-nxt;
+        };
+        /omit-if-no-ref/ ind_prv: ind_prv {
+            compatible = "zmk,behavior-rgbled-widget";
+            #binding-cells = <0>;
+            indicate-prv;
+        };
+        /omit-if-no-ref/ ind_clr: ind_clr {
+            compatible = "zmk,behavior-rgbled-widget";
+            #binding-cells = <0>;
+            indicate-clr;
+        };
+        /omit-if-no-ref/ ind_clr_all: ind_clr_all {
+            compatible = "zmk,behavior-rgbled-widget";
+            #binding-cells = <0>;
+            indicate-clr-all;
+        };
+    };
+};
